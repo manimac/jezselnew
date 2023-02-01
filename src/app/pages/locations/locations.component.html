@@ -1,0 +1,46 @@
+<!-- =======================
+	Banner innerpage
+<div class="innerpage-banner left bg-overlay-dark-7 py-7 drop-slider"
+    style="background:url(assets/images/about.jpg) repeat; background-size:cover;">
+    <div class="container">
+        <div class="row all-text-white">
+            <div class="col-md-12 align-self-center">
+                <h1 class="innerpage-title">Locations</h1>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="jezel-inner-page-banner-area">
+    <h1>Locaties</h1>
+    <img src="assets/images/location.jpg"> 
+</div>
+
+
+<!-- =======================Banner innerpage -->
+<div class="section section-padding">
+    <div class="container">
+     <div class="jezsel-locatio-section shadow" *ngFor="let data of dataLists">
+        <div class="row">
+            <div class="col-lg-6 col-12 align-self-center">
+                <div class="about-content text-center ">
+                    <div class="desc" [innerHtml]="data.content">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="portfolio-card isotope-item digital">
+                    <div class="portfolio-card-body">
+                        <iframe width="100%" height="200" allowfullscreen="" loading="lazy" style="border: 0;" [src]="data.iframes | safe"></iframe>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <!-- row end here -->
+    </div>   
+    </div>
+</div>

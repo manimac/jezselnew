@@ -1,0 +1,288 @@
+<!-- =======================
+	Banner innerpage
+<div class="innerpage-banner left bg-overlay-dark-7 py-7 drop-slider"
+    style="background:url(assets/images/about.jpg) repeat; background-size:cover;">
+    <div class="container">
+        <div class="row all-text-white">
+            <div class="col-md-12 align-self-center">
+                <h1 class="innerpage-title">Locations</h1>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="jezel-inner-page-banner-area">
+    <h1>Boeking</h1>
+    <img src="assets/images/location.jpg"> 
+</div>
+
+
+
+
+<!-- =======================
+	Form -->
+<section class="pt80 pb80 eleform">
+    <div class="container">      
+        <div class="col-lg-12 col-md-12 col-sm-12 Filter-left  jezsel-profile-section jezselcart-rtb booking-form">
+            <form action="#" autocomplete="off">
+                <div class="pb-left">
+                    <div id="moreFilters" class="collapse show">
+                        <div class="filter-block">
+                            <h1 class="mb-3"><strong>Overzicht</strong></h1>
+                            <hr>
+                            <div class="summary" *ngFor="let product of dataLists;let i =index;">
+                                <table style="width:100%;">
+                                    <tr>
+                                        <td>
+                                            <h4 class="font-weight-bold">{{i+1}}. {{product.name}}</h4>
+                                        </td>
+                                        <td class="pl-2 text-right font-weight-bold">
+                                            <h4><span>&#8364;</span>{{product.priceperhr}}</h4>
+                                        </td>
+                                    </tr>
+                                    <tr *ngFor="let x of product['Extras']">
+                                        <td *ngIf="x.checked">{{x.description}}</td>
+                                        <td class="pl-2 text-right" *ngIf="x.checked"><span>&#8364;</span>{{x.price}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4 class="font-weight-bold">Borg</h4>
+                                        </td>
+                                        <td class="pl-2">
+                                            <h4 class="text-right font-weight-bold"><span>&#8364;</span>{{product.advancePayment}}</h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <hr>
+                            </div>
+
+                            <h4 *ngIf="couponPrice" class="font-weight-bold">Korting: <span class="float-right "> <span>&#8364;</span>{{couponPrice}}</span>
+                                <hr>
+                            </h4>
+                             
+                            <h5 class="float-right font-weight-bold">Totaal: <span class=""> <span>&#8364;</span>{{total}}</span>
+                            </h5>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row mt-3">
+            <div class="col-lg-4 jezsel-couponcode-text">
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="Kortingscode" [(ngModel)]="coupon">
+                </div>
+            </div>
+            <div class="col-lg-4"> 
+                <div class="form-group">
+                    <button class="btn btn-primary" (click)="applyCoupon()">Toepassen</button>
+                </div>
+            </div>
+        </div>  
+        <form class="mt-4" [formGroup]="formGroup" (ngSubmit)="orderNow()">
+            <div class="row">
+                <div class="col-md-6 jezsel-couponcode-text">
+                    <div class="form-group">
+                        <select class="form-control" formControlName="type" [ngClass]="{ 'is-invalid': (submittedForm&&!f.type.value) }">
+                            <option value="" disabled>Type</option>
+                            <option value="business">Zakelijk</option>
+                            <option value="customer">Particulier</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                    <div *ngIf="formGroup.value.type == 'business'">
+                        <h3>Bedrijfsgegevens</h3>
+                        <div class="form-group mt-4">
+                            <input class="form-control" type="text" placeholder="Bedrijfsnaam"
+                                formControlName="bedrijfsnaam">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" placeholder="KVK" formControlName="kvk">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" placeholder="BTW nr." formControlName="btwnr">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="jezsel-profile-section">
+            <div class="row">
+                <div class="col-md-6 ">
+                    <h3>Vestigingsadres</h3>
+                        <div class="form-group mt-4">
+                            <input class="form-control" type="text" placeholder="Straat" formControlName="vesigingstraat"  [ngClass]="{ 'is-invalid': (submittedForm&&!f.vesigingstraat.value) }">
+                        </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Huisnr en toevoeging"
+                            formControlName="vesiginghuisnr" [ngClass]="{ 'is-invalid': (submittedForm&&!f.vesiginghuisnr.value) }">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Postcode"
+                            formControlName="vesigingpostcode" [ngClass]="{ 'is-invalid': (submittedForm&&!f.vesigingpostcode.value) }">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Plaats" formControlName="vesigingplaats" [ngClass]="{ 'is-invalid': (submittedForm&&!f.vesigingplaats.value) }">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Land" formControlName="vesigingland" [ngClass]="{ 'is-invalid': (submittedForm&&!f.vesigingland.value) }">
+                    </div>
+                    <div class="form-check mt-4">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
+                            (change)="sync($event)">
+                        <label class="form-check-label" for="defaultCheck1">
+                            Vestigingsadres is hetzelfde als het factuuradres
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div>
+                        <h3>Factuuradres</h3>
+                        <div class="form-group mt-4">
+                            <input class="form-control" type="text" placeholder="Straat"
+                                formControlName="factuurstraat" [ngClass]="{ 'is-invalid': (submittedForm&&!f.factuurstraat.value) }">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" placeholder="Huisnr en toevoeging"
+                                formControlName="factuurhuisnr" [ngClass]="{ 'is-invalid': (submittedForm&&!f.factuurhuisnr.value) }">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" placeholder="Postcode"
+                                formControlName="factuurpostcode" [ngClass]="{ 'is-invalid': (submittedForm&&!f.factuurpostcode.value) }">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" placeholder="Plaats"
+                                formControlName="factuurplaats" [ngClass]="{ 'is-invalid': (submittedForm&&!f.factuurplaats.value) }">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" placeholder="Land" formControlName="factuurland" [ngClass]="{ 'is-invalid': (submittedForm&&!f.factuurland.value) }">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h3 class="mt-4">Contact details</h3>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <select class="form-control" formControlName="aanhef" [ngClass]="{ 'is-invalid': (submittedForm&&!f.aanhef.value) }">
+                            <option value="">Aanhef</option>
+                            <option value="dhr">Dhr</option>
+                            <option value="mevr">Mevr</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Voornaam" formControlName="voornaam" [ngClass]="{ 'is-invalid': (submittedForm&&!f.voornaam.value) }">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Achternaam" formControlName="achternaam" [ngClass]="{ 'is-invalid': (submittedForm&&!f.achternaam.value) }">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Tussenvoegsel"
+                            formControlName="tussenvoegsel">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="email" placeholder="Factuur e-mail"
+                            formControlName="factuuremail" [ngClass]="{ 'is-invalid': (submittedForm&&!f.factuuremail.value) }">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Telefoon nr."
+                            formControlName="telefoonnr" [ngClass]="{ 'is-invalid': (submittedForm&&!f.telefoonnr.value) }">
+                    </div>
+                </div>
+            </div>
+            <h3 class="mt-4" *ngIf="isEnableDriver()">Bestuurdersgegevens</h3>
+            <div class="row mt-4" *ngIf="isEnableDriver()">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Voornaam" formControlName="driverFirstName">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="E-mail" formControlName="driverEmail">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" type="text" placeholder="Adres" formControlName="driverAddress"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Achternaam" formControlName="driverLastName">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Mobiele nummer"
+                            formControlName="driverPhone">
+                    </div>
+                    <div class="upload-btn-wrapper">
+                        <button class="btn-upload">Rijbewijs uploaden</button>
+                        <input type="file" name="myfile"  #thumbnail
+                        (change)="onThumbnailChange(thumbnail.files)">
+                        <div *ngIf="driverLicense" class="text-success">File Uploaded</div>
+                      </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-12" *ngIf="currentBalance">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault2" formControlName="useBalance">
+                        <label class="form-check-label" for="flexCheckDefault2">
+                            Gebruik saldo {{currentBalance}}
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" formControlName="termsAndConditions">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            <a (click)="openTermsModal()" class="text-info">Ik ga akkoord met de Algemene voorwaarden</a>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-4">
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-lg btn-grad" type="submit"
+                            [disabled]="(!formGroup.value.termsAndConditions||formGroup.value.termsAndConditions==false)">Bestel nu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+        </form>
+    </div>
+</section>
+
+<!-- =======================
+	Form -->
+<ng-template #template>
+    <div id="myModalId">
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Bestellen</h4>
+            <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+                <span aria-hidden="true" class="visually-hidden">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body mb-2 text-center">
+            <button class="btn btn-primary" (click)="bookNow()">Betalen</button>
+            <button class="btn btn-primary ml-2" (click)="sendPaymentLink()">Verstuur betalingslink</button>
+        </div>
+    </div>
+
+</ng-template>
+
+<ng-template #termstemplate>
+    <div id="myModalId">
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Algemene voorwaarden</h4>
+            <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+                <span aria-hidden="true" class="visually-hidden">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body mb-2 p-5 terms-content">
+            <p [innerHtml]="termsAndConditions"></p>
+        </div>
+    </div>
+
+</ng-template>

@@ -1,0 +1,104 @@
+<!-- =======================
+	Banner innerpage
+<div class="innerpage-banner left bg-overlay-dark-7 py-7 drop-slider"
+    >
+    <div class="container">
+        <div class="row all-text-white">
+            <div class="col-md-12 align-self-center">
+                <h1 class="innerpage-title">Contact Us</h1>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="jezel-inner-page-banner-area">
+<h1>Contact</h1>
+<img src="assets/images/contact.jpg"> 
+</div>
+
+
+<!-- ======================= Banner innerpage -->
+<section class="contact-area contact-pg-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="get-in-touch">
+                    <div class="sec-title">
+                        <h3>Kom in contact</h3>
+                    </div>
+                    <div class="contact-form">
+                        <form id="ajax-contact" [formGroup]="myFormGroup" (ngSubmit)="save()">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Naam</label>
+                                    <p>
+                                        <input type="text" name="name" placeholder="Voer uw naam in" formControlName="name">
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>E-mail</label>
+                                    <p>
+                                        <input type="text" name="email" placeholder="Voer uw e-mailadres in" formControlName="email">
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Telefoon</label>
+                                    <p>
+                                        <input type="text" name="phone" placeholder="Voer uw telefoonnummer in" formControlName="phone">
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Onderwerp</label>
+                                    <p>
+                                        <input type="text" name="subject" placeholder="Uw onderwerp" formControlName="subject">
+                                    </p>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Bericht</label>
+                                    <p>
+                                        <textarea name="message" placeholder="Uw bericht" formControlName="message"></textarea>
+                                    </p>
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="submit" [ngClass]="{'send-disabled':myFormGroup.invalid}" [disabled]="myFormGroup.invalid">Verzend bericht</button>
+                                </div>
+                            </div>
+                            <div id="form-messages"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="contact-info">
+                    <div>
+                        <div class="icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="details">
+                            <h5>Bel ons</h5>
+                            <p>{{contactDetails.phone}}</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="icon">
+                            <i class="far fa-envelope"></i>
+                        </div>
+                        <div class="details">
+                            <h5>Mail ons</h5>
+                            <p>{{contactDetails.email}}</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="icon">
+                            <i class="fas fa-street-view"></i>
+                        </div>
+                        <div class="details">
+                            <h5>Vind ons</h5>
+                            <p>{{contactDetails.address}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

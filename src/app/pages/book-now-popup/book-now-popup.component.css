@@ -1,0 +1,30 @@
+.form-control{
+    padding-left: 2rem;
+}
+.modal-content{
+    margin-bottom: 0.5rem !important;
+}
+.tab-content .form-group span{
+    line-height: 40px;
+}
+
+.mt-1-35{
+    margin-top: 1.35rem !important;
+}
+.modal-body{
+    max-height: 500px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+option:disabled { background-color: #f3f3f3;  }
+
+
+#jezl-hm-search.jezl-pop-up-search-gap-pad{ grid-gap: 10px; padding: 0px 10px;}
+#jezl-hm-search.jezl-pop-up-search-gap-pad .btn-primary:disabled{ border-radius: 0px;}
+.form-group.jezl-popup-f-btn button{ border-radius: 0px;}
+
+.modal.show .modal-dialog {
+	-webkit-transform: none;
+	transform: none;
+	position: relative !important;
+}

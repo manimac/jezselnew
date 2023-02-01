@@ -1,0 +1,154 @@
+<!-- =======================
+	Banner innerpage
+<div class="innerpage-banner left bg-overlay-dark-7 py-7 drop-slider"
+    style="background:url(assets/images/about.jpg) repeat; background-size:cover;">
+    <div class="container">
+        <div class="row all-text-white">
+            <div class="col-md-12 align-self-center">
+                <h1 class="innerpage-title">Cart</h1>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="jezel-inner-page-banner-area">
+    <h1>Store</h1> 
+    <img src="assets/images/location.jpg"> 
+</div>
+
+<!-- ======================= Banner innerpage -->
+
+<section class="pt80 pb80 cruise-grid-view">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-9 col-sm-12">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12" *ngFor="let data of dataLists;let i = index;">
+                        <div class="listing-item ">
+                            <article class="TravelGo-category-listing fl-wrap">
+                                <div class="row">
+                                    <div class="col-lg-5 col-md-6 col-sm-12">
+                                        <div class="TravelGo-category-img TravelGo-category-list-img">
+                                            <a routerLink="/service-detail/{{data.id}}"><img
+                                                    [src]="data.path + data.thumbnail" alt=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-7 col-md-6 col-sm-12">
+                                        <div class="TravelGo-category-content fl-wrap title-sin_item">
+                                            <div class="TravelGo-category-content-title fl-wrap">
+                                                <div class="TravelGo-category-content-title-item">
+                                                    <h3 class="title-sin_map"><a
+                                                            routerLink="/service-detail/{{data.id}}">{{data.name}}</a><a
+                                                            class="jezsel-cart-service-trash"><i
+                                                                class="fas fa-trash"
+                                                                (click)="delete(i)"></i></a><span>&#8364;{{data.priceperhr}}</span>
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                            <div class="TravelGo-category-content-title fl-wrap pb-2">
+                                                <div class="TravelGo-category-content-title-item schedule">
+                                                    <h5 class="title-sin_map jezsel-cart-lfdtd">
+
+                                                    <div class="loc">
+                                                        <img src="assets/images/icon/location.png"><a>{{data.search.location}}</a>
+                                                    </div>
+                                                    <!-- location end here -->
+                                                    <div class="frd">
+                                                        <img src="assets/images/icon/calendar.png"><a>{{data.search.checkindate}}
+                                                            <div class="clearfix mb-1"></div>
+                                                        <img src="assets/images/icon/time.png"> {{data.search.checkintime}}</a>
+                                                    </div>  
+                                                    <!-- from date and time -->
+                                                    <div class="tod">       
+                                                        <img src="assets/images/icon/calendar.png"><a>{{data.search.checkoutdate}}
+                                                            <div class="clearfix mb-1"></div>
+                                                        <img src="assets/images/icon/time.png"> {{data.search.checkouttime}}</a>
+                                                     </div>       
+                                                     <!-- to date and time -->
+                                                    </h5>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12 mt-4">
+                                        <div class="form-check" *ngFor="let x of data['Extras']">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckDefault" (click)="addExtra($event,x, i)"
+                                                [checked]="x.checked" [disabled]="x.isDisabled">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                {{x.description}} - <b> <span>&#8364;</span>{{x.price}}</b>
+                                            </label>
+                                        </div>
+                                        <h4 class="cancel-options">Ga verder met winkelen</h4>
+                                        <div class="form-check" *ngFor="let x of data.cancelLists">
+                                            <input class="form-check-input" type="radio" value=""
+                                                id="flexCheckDefault" name="{{i}}" (change)="updateProducts($event, i, x.id)" value="{{x.label}}" [checked]="x.selected">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                {{x.label}} - <b><span>&#8364;</span>{{x.price}}</b>
+                                            </label>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12" *ngIf="dataLists.length==0">
+                        <p>Geen diensten toegevoegd</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12 Filter-left jezselcart-rtb pb-2">
+                <form action="#" autocomplete="off">
+                    <div class="pb-left">
+                        <div id="moreFilters" class="collapse show">
+                            <div class="filter-block">
+                                <h6 class="mb-3">Overzicht</h6>
+                                <hr>
+                                <div class="summary" *ngFor="let product of dataLists;let i =index;">
+                                    <table class="w-100">
+                                        <tr>
+                                            <td colspan="2">
+                                                <h4 class="font-weight-bold">{{i+1}}. {{product.name}}</h4>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="w-60">Prijs per uur</td>
+                                            <td class="w-40 jezsel-cart-txt-right"><span>&#8364;</span>{{product.priceperhr}}</td>
+                                        </tr>
+                                        <tr *ngFor="let x of product['Extras']">
+                                            <td *ngIf="x.checked">{{x.description}}</td>
+                                            <td *ngIf="x.checked" class="jezsel-cart-txt-right"><span>&#8364;</span>{{x.price}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h4 class="jezsel-cart-advance-payment">Borg</h4> 
+                                            </td>
+                                            <td class="jezsel-cart-txt-right">
+                                                <h4><span>&#8364;</span><span [innerHtml]="getAdvancePayment(product.advancePayment)">{{product.advancePayment}}</span></h4>
+                                            </td>
+                                        </tr> 
+                                    </table>
+                                    <hr>
+                                </div>
+                                <h5 class="jezsel-cart-text-b" *ngIf="dataLists.length==0">Te betalen borg
+                                </h5>
+                                <h5 class="jezsel-cart-text-b" *ngIf="dataLists.length>0">Totaal: <span class="float-right"> <span>&#8364;</span>{{total}}</span>
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="mb-left">
+                            <button class="btn btn-primary FilterBtn jezsel-cart-pr-btn" [disabled]="dataLists.length==0"
+                                (click)="proceed()"> Betalen</button>
+                            <button type="submit" class="btn btn-primary FilterBtn" routerLink="/"> Ga verder met winkelen </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

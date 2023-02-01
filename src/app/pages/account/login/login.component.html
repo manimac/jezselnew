@@ -1,0 +1,34 @@
+<section class="login-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="login-box">
+                    <h3 class="text-center text-primary mb-4">Inloggen</h3>
+                    <form class="login-form" [formGroup]="myFormGroup" (ngSubmit)="login()">
+                        <div class="row">
+                            <div class="col-md-12 email">
+                                <label>E-mailadres / telefoonnummer</label>
+                                <input type="text" name="email" formControlName="email" placeholder="Voer uw e-mailadres in / telefoonnummer">
+                            </div>
+                            <div class="col-md-12 password">
+                                <label>Wachtwoord</label>
+                                <input type="password" name="email" formControlName="password" placeholder="Voer uw wachtwoord in">
+                            </div>
+                            <div class="col-md-12 d-flex justify-content-between">
+                                <div class="forget-btn">
+                                    <a routerLink="/forget-password">Wachtwoord vergeten?</a>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button type="submit" name="button">Inloggen</button>
+                            </div>
+                            <div class="login-btm text-center">
+                                <p>Bent u nog geen klant? <a class="text-primary" routerLink="/register">Maak een account aan</a></p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

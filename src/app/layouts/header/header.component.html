@@ -1,0 +1,89 @@
+<!-- =======================
+	header Start-->
+<header class="header-static navbar-sticky navbar-light shadow jezl-hd-cw-fixed">
+    <!-- Search -->
+    <div class="top-search collapse bg-light" id="search-open" data-parent="#search">
+        <div class="container">
+            <div class="row position-relative">
+                <div class="col-md-8 mx-auto py-5">
+                    <form>
+                        <div class="input-group">
+                            <input class="form-control border-radius-right-0 border-right-0" type="text" name="search"
+                                autofocus placeholder="What are you looking for?">
+                            <button type="button" class="btn btn-grad border-radius-left-0 mb-0">Search</button>
+                        </div>
+                    </form>
+                    <!-- <p class="small mt-2 mb-0"><strong>e.g.</strong>Template, TravelGo, WordPress </p> -->
+                </div>
+                <a class="position-absolute top-0 right-0 mt-3 mr-3" data-toggle="collapse" href="#search-open"><i
+                        class="fas fa-window-close"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- End Search -->
+
+
+
+    <!-- Logo Nav Start -->
+    <nav class="navbar navbar-expand-lg ">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand" routerLink="/"> <img src="assets/images/logo.png" alt="Logo"> </a>
+            <!-- Menu opener button -->
+            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"> <span
+                    class="navbar-toggler-icon"> </span> </button>
+            <!-- Main Menu Start -->
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav ml-auto">
+                    <!-- Menu item 1 Demos-->
+                    <li class="nav-item" routerLinkActive="active"> <a class="nav-link" routerLink="/home"
+                            id="demosMenu">Home</a></li>
+                    <li class="nav-item dropdown" routerLinkActive="active"> <a class="nav-link dropdown-toggle"
+                            id="demosMenu" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">Diensten</a>
+                        <ul class="dropdown-menu" aria-labelledby="homeMenu">
+                            <li><a class="dropdown-item" routerLink="/services/rent">Verhuur</a></li>
+                            <li><a class="dropdown-item" routerLink="/services/staffing">Uitzenden</a></li>
+                            <li><a class="dropdown-item" routerLink="/services/transport">Transport</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item" routerLinkActive="active"> <a class="nav-link" routerLink="/locations"
+                            id="demosMenu">Locaties</a></li>
+                    <li class="nav-item" routerLinkActive="active"> <a class="nav-link" routerLink="/faq"
+                            id="demosMenu">Veelgestelde vragen</a></li>
+                    <li class="nav-item" routerLinkActive="active"> <a class="nav-link" routerLink="/garanties"
+                            id="demosMenu">Garanties en certificaten</a></li>
+                    <li class="nav-item" routerLinkActive="active"> <a class="nav-link" routerLink="/contact"
+                            id="demosMenu">Contact</a></li>
+                    <li class="nav-item" routerLinkActive="active" *ngIf="!userDetails.firstname">
+                        <div class="jezel-cart-lgin-i">
+                            <a class="nav-link" routerLink="/cart">
+                                <img src="assets/images/icon/cart.png" class="cart-icon" alt="Store">
+                            </a> 
+                            <a class="nav-link" routerLink="/login">
+                                <img src="assets/images/icon/login.png" class="login-icon" alt="Store">
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item" routerLinkActive="active" *ngIf="userDetails.firstname">
+                        <div class="jezel-cart-lgin-i">
+                            <a class="nav-link" routerLink="/cart">
+                                <img src="assets/images/icon/cart.png" class="cart-icon" alt="Store">
+                            </a> 
+                            <div class="dropdown " *ngIf="userDetails.firstname"> <a class="dropdown-toggle" href="#" role="button" id="dropdownAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img  src="assets/images/icon/login.png" alt="Store" class="login-icon">{{userDetails.firstname}} </a>
+                                <div class="dropdown-menu mt-2 shadow" aria-labelledby="dropdownAccount"> 
+                                    <a class="dropdown-item" (click)="navigateProfile()">Mijn profiel</a> 
+                                    <a class="dropdown-item" (click)="logout()">Uitloggen</a> </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- Main Menu End -->
+        </div>
+    </nav>
+    <!-- Logo Nav End -->
+</header>
+<!-- =======================
+	header End-->

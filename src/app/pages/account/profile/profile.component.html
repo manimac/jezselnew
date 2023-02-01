@@ -1,0 +1,954 @@
+<!-- ======================= Banner innerpage 
+<div class="innerpage-banner left bg-overlay-dark-7 py-7"
+    style="background:url(assets/images/07.jpg) repeat; background-size:cover;">
+    <div class="container">
+        <div class="row all-text-white">
+            <div class="col-md-12 align-self-center">
+                <h1 class="innerpage-title title">My Profile</h1>
+            </div>
+        </div>
+    </div>
+</div>-->
+<!-- ======================= Banner innerpage -->
+
+<div class="jezel-inner-page-banner-area">
+    <h1>Mijn Profiel</h1> 
+    <img src="assets/images/profile.jpg"> 
+</div>
+
+
+
+
+<!-- =======================
+	Form -->
+<section class="eleform mt-5">
+    <div class="container">
+        <div class="row ">
+            <div class="col-lg-3">
+
+
+
+                <div class="nav flex-column nav-pills jezsel-profile-lt-nav shadow" id="v-pills-tab" role="tablist"
+                    aria-orientation="vertical">
+                    <div class="jezel-pro-login-tl">
+                        <div class="jezel-pro-login-name">{{userDetails.firstname}} {{userDetails.lastname}}</div>
+                        <div class="jezel-pro-login-emailid">{{userDetails.email}}</div>
+                        <div class="jezel-pro-logout"><a href="javascript:void(0);" (click)="logout()">Uitloggen</a></div>
+                    </div>
+                    <!-- Login nel end here -->
+
+                    <a class="nav-link active pl-4" id="v-pills-my-orders-tab" data-toggle="pill"
+                        href="#v-pills-my-orders" role="tab" aria-controls="v-pills-my-orders" aria-selected="true">Mijn boekingen</a>
+                    <a class="nav-link pl-4" id="v-pills-address-tab" data-toggle="pill" href="#v-pills-address"
+                        role="tab" aria-controls="v-pills-address" aria-selected="false">Profiel & instellingen</a>
+                    <!--<a class="nav-link pl-4" id="v-pills-password-tab" data-toggle="pill" href="#v-pills-password"
+                        role="tab" aria-controls="v-pills-password" aria-selected="false">Change Password</a>
+                    <a class="nav-link pl-4" id="v-pills-deposit-tab" data-toggle="pill" href="#v-pills-deposit"
+                        role="tab" aria-controls="v-pills-deposit" aria-selected="false">Deposit</a>
+                    <a class="nav-link pl-4" id="v-pills-withdraw-tab" data-toggle="pill" href="#v-pills-withdraw"
+                        role="tab" aria-controls="v-pills-withdraw" aria-selected="false"
+                        *ngIf="!team_id||(team_id&&teamowner)">Withdraw</a> -->
+                    <a class="nav-link pl-4" id="v-pills-wallet-tab" data-toggle="pill" href="#v-pills-wallet"
+                        role="tab" aria-controls="v-pills-wallet" aria-selected="false"
+                        *ngIf="!team_id||(team_id&&teamowner)">Wallet</a>
+                    <a class="nav-link pl-4" id="v-pills-employees-tab" data-toggle="pill" href="#v-pills-employees"
+                        role="tab" aria-controls="v-pills-employees" aria-selected="false"
+                        *ngIf="!team_id||(team_id&&teamowner)">Werknemers</a>
+                </div>
+            </div>
+            <div class="col-lg-9">
+
+
+                <div class="tab-content" id="v-pills-tabContent">
+
+
+                    <div class="tab-pane fade show active " id="v-pills-my-orders" role="tabpanel"
+                        aria-labelledby="v-pills-my-orders-tab">
+                        <div class="jezsel-profile-section shadow">
+
+                            <h3>Mijn boekingen</h3>
+                            <!-- <h5>Wallet - {{currentWallet}}</h5> -->
+                            <div class="row mt-3">
+                                <div class="col-lg-12 col-12 align-self-center table-responsive ">
+                                    <table class="table table-bordered ">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Geboekt op</th>
+                                                <th>Betaalde borg</th>
+                                                <th>Status van betaling</th>
+                                                <th>Meer informatie</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let data of ordersdataLists;let i= index;">
+                                                <td>{{i+1}}</td>
+                                                <td>{{data.createdAt|date:'dd/M/yyyy'}}</td>
+                                                <td><span>&#8364;</span>{{data.total}}</td>
+                                                <td>
+                                                    <span *ngIf="data.status == 1"> Succes</span>
+                                                    <span *ngIf="data.status == 2"> Mislukt</span>
+                                                    <span *ngIf="data.status == 3&&data.paymentLinkstatus!=2"> In behandeling <button class="btn btn-primary ml-2" (click)="sendPaymentLink(data)">Betalen</button></span>
+                                                    <span *ngIf="data.status == 3&&data.paymentLinkstatus==2"> In behandeling (Betaallink verstuurd naar e-mail)</span>
+                                                </td>
+                                                <td><button class="btn btn-primary" (click)="viewDetails(data)">Zie details</button></td>
+                                            </tr>
+                                            <tr *ngIf="ordersdataLists.length==0">
+                                                <td colspan="5" class="text-center">Geen bestellingen gevonden</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- profile section end here -->
+                    </div>
+                    <!-- my orders end here -->
+
+
+
+                    <div class="tab-pane fade" id="v-pills-address" role="tabpanel"
+                        aria-labelledby="v-pills-address-tab">
+                        <!-- <div class="jezsel-profile-section shadow">
+                            <h3 class="mb-3">Profile</h3>
+                            <div class="jezel-profile-details-g">
+                                <table>
+                                    <tr>
+                                      <td valign="top">Dhr</td>
+                                      <td valign="top">&nbsp;</td>
+                                      <td valign="top">&nbsp;</td>
+                                    </tr>
+                                  <tbody>
+                                  <tr>
+                                      <td valign="top">Voornaam</td> <td valign="top">:</td> <td valign="top">Selvan</td>
+                                  </tr>
+                                  <tr>
+                                    <td valign="top">Achternaam</td>
+                                    <td valign="top">:</td>
+                                    <td valign="top">Karthikesu</td>
+                                  </tr>
+                                  <tr>
+                                    <td valign="top">Tussenvoegsel</td>
+                                    <td valign="top">:</td>
+                                    <td valign="top">xyzzzz</td>
+                                  </tr>
+                                  <tr>
+                                    <td valign="top">Address Type</td>
+                                    <td valign="top">:</td>
+                                    <td valign="top">Customer</td>
+                                  </tr>
+                                  <tr>
+                                    <td valign="top">Vestigingsadres</td>
+                                    <td valign="top">:</td>
+                                    <td valign="top">Spinveld 35<br>
+                                      4815HR Breda</td>
+                                  </tr>
+                                  <tr>
+                                    <td valign="top">Factuuradres</td>
+                                    <td valign="top">:</td>
+                                    <td valign="top">Spinveld 35<br>
+                                      4815HR Breda</td>
+                                  </tr>
+                                  <tr>
+                                    <td valign="top">Telefoonnummer</td> <td valign="top">:</td> <td valign="top">0611584090</td>
+                                </tr>                                  
+                                  </tbody>
+                                  </table>
+
+                                  <div class="form-group">
+                                    <button type="submit" class="btn btn-primary ">Aanpassen</button>
+                                </div>
+
+                            </div>
+
+                        </div> -->
+                        <!-- profile end here -->
+
+                        <!-- <div class="jezsel-profile-section shadow">
+                            <h3 class="mb-3">E-mailadres</h3>
+                            <div class="jezel-profile-details-g">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td valign="top">E-mailadres</td>
+                                            <td valign="top">:</td>
+                                            <td valign="top">selvan@live.nl</td>
+                                        </tr>
+                                    </tbody>
+                                    </table>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Aanpassen</button>
+                                    </div>                                    
+                            </div>
+                        </div>-->
+                        <!-- email id change end here -->
+
+
+
+                        <div class="jezsel-profile-section shadow">
+                            <h3 class="mb-3">Wachtwoord</h3>
+                            <div class="jezel-profile-details-g">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td valign="top">Wachtwoord <i class="fa fa-info-circle" title="
+                                                Een wachtwoord moet alfanumeriek zijn. De eerste letter van het wachtwoord moet een hoofdletter zijn. Het wachtwoord moet een speciaal teken bevatten (@, $, !, &, enz.). Het wachtwoord moet langer zijn dan 8 tekens."></i></td>
+                                            <td valign="top">:</td>
+                                            <td valign="top" *ngIf="!showPasswordField">************</td>
+                                            <td valign="top" *ngIf="showPasswordField">
+                                                <form class="mt-3" [formGroup]="passwordformGroup" (ngSubmit)="save()">
+                                                    <input class="form-control" type="password"
+                                                        placeholder="Voer uw wachtwoord in" formControlName="password">
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary" (click)="editPassword()"
+                                        *ngIf="!showPasswordField">Aanpassen</button>
+                                    <button type="submit" class="btn btn-primary" (click)="save()"
+                                        *ngIf="showPasswordField">Update</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- Password end here -->
+
+
+
+
+                        <div class="jezsel-profile-section shadow">
+                            <h3>Adres</h3>
+                            <form class="mt-3" [formGroup]="formGroup" (ngSubmit)="updateAddress()">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <select class="form-control" formControlName="type"
+                                                [attr.disabled]="!showAddressField ? '' : null">
+                                                <option value="">Type</option>
+                                                <option value="business">Zakelijk</option>
+                                                <option value="customer">Particulier</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6"></div>
+                                    <div class="col-md-6">
+                                        <div *ngIf="formGroup.value.type == 'business'">
+                                            <h3>Bedrijfsgegevens</h3>
+                                            <div class="form-group mt-4">
+                                                <input class="form-control" type="text" placeholder="Bedrijfsnaam"
+                                                    formControlName="bedrijfsnaam"
+                                                    [attr.disabled]="!showAddressField ? '' : null">
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-control" type="text" placeholder="KVK"
+                                                    formControlName="kvk"
+                                                    [attr.disabled]="!showAddressField ? '' : null">
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-control" type="text" placeholder="BTW nr."
+                                                    formControlName="btwnr"
+                                                    [attr.disabled]="!showAddressField ? '' : null">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h3>Vestigingsadres</h3>
+                                        <div class="form-group mt-4">
+                                            <input class="form-control" type="text" placeholder="Straat"
+                                                formControlName="vesigingstraat"
+                                                [attr.disabled]="!showAddressField ? '' : null">
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" placeholder="Huisnr en toevoeging"
+                                                formControlName="vesiginghuisnr"
+                                                [attr.disabled]="!showAddressField ? '' : null">
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" placeholder="Postcode"
+                                                formControlName="vesigingpostcode"
+                                                [attr.disabled]="!showAddressField ? '' : null">
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" placeholder="Plaats"
+                                                formControlName="vesigingplaats"
+                                                [attr.disabled]="!showAddressField ? '' : null">
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" placeholder="Land"
+                                                formControlName="vesigingland"
+                                                [attr.disabled]="!showAddressField ? '' : null">
+                                        </div>
+                                        <div class="form-check mt-4">
+                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
+                                                (change)="sync($event)" [attr.disabled]="!showAddressField ? '' : null">
+                                            <label class="form-check-label" for="defaultCheck1">
+                                                Vestigingsadres is hetzelfde als het factuuradres
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div>
+                                            <h3>Factuuradres</h3>
+                                            <div class="form-group mt-4">
+                                                <input class="form-control" type="text" placeholder="Straat"
+                                                    formControlName="factuurstraat"
+                                                    [attr.disabled]="!showAddressField ? '' : null">
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-control" type="text"
+                                                    placeholder="Huisnr en toevoeging" formControlName="factuurhuisnr"
+                                                    [attr.disabled]="!showAddressField ? '' : null">
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-control" type="text" placeholder="Postcode"
+                                                    formControlName="factuurpostcode"
+                                                    [attr.disabled]="!showAddressField ? '' : null">
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-control" type="text" placeholder="Plaats"
+                                                    formControlName="factuurplaats"
+                                                    [attr.disabled]="!showAddressField ? '' : null">
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-control" type="text" placeholder="Land"
+                                                    formControlName="factuurland"
+                                                    [attr.disabled]="!showAddressField ? '' : null">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="mt-4">Contact details</h3>
+                                <div class="row mt-4">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <select class="form-control" formControlName="aanhef"
+                                                [attr.disabled]="!showAddressField ? '' : null">
+                                                <option value="">Aanhef</option>
+                                                <option value="dhr">Dhr</option>
+                                                <option value="mevr">Mevr</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" placeholder="Voornaam"
+                                                formControlName="voornaam"
+                                                [attr.disabled]="!showAddressField ? '' : null">
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" placeholder="Achternaam"
+                                                formControlName="achternaam"
+                                                [attr.disabled]="!showAddressField ? '' : null">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" placeholder="Tussenvoegsel"
+                                                formControlName="tussenvoegsel"
+                                                [attr.disabled]="!showAddressField ? '' : null">
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" type="email" placeholder="Factuur e-mail"
+                                                formControlName="factuuremail"
+                                                [attr.disabled]="!showAddressField ? '' : null">
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" type="email" placeholder="Telefoon nr."
+                                                formControlName="telefoonnr"
+                                                [attr.disabled]="!showAddressField ? '' : null">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <button class="btn btn-primary" type="submit" [disabled]="formGroup.invalid"
+                                                *ngIf="!showAddressField">Aanpassen</button>
+                                            <button class="btn btn-primary" type="submit" [disabled]="formGroup.invalid"
+                                                *ngIf="showAddressField">Update</button>
+                                            <button class="btn btn-info ml-3" *ngIf="showAddressField"
+                                                (click)="showAddressField=false;">Annuleren</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- profile section end here -->
+                    </div>
+                    <!-- address end here -->
+
+                    <div class="tab-pane fade" id="v-pills-password" role="tabpanel"
+                        aria-labelledby="v-pills-password-tab">
+                        <div class="eleform jezsel-profile-section shadow">
+
+                            <h3>Change Password</h3>
+                            <form class="mt-3" [formGroup]="passwordformGroup" (ngSubmit)="save()">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input class="form-control" type="password" placeholder="Voer Password"
+                                                formControlName="password">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6"></div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input class="form-control" type="password"
+                                                placeholder="Voer Confirm Password" formControlName="confirmpassword">
+                                            <p class="text-danger"
+                                                *ngIf="passwordformControls.password.value!=passwordformControls.confirmpassword.value">
+                                                Password and Confirm password does not match</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6"></div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <button class="btn btn-primary btn-lg btn-grad" type="submit"
+                                                [disabled]="passwordformGroup.invalid||(passwordformControls.password.value!=passwordformControls.confirmpassword.value)">Update
+                                                Password</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                        <!-- profile section end here -->
+                    </div>
+                    <!-- Password end here -->
+
+                    <!-- <div class="tab-pane fade" id="v-pills-withdraw" role="tabpanel"
+                        aria-labelledby="v-pills-withdraw-tab">
+                        <div class="section mb-5">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button class="pull-right btn btn-primary"
+                                            (click)="openWithdrawModal()" [disabled]="disableWithdraw()"
+                                            *ngIf="!team_id||(team_id&&teamowner)">Withdraw</button>
+
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-lg-12 col-12 align-self-center">
+                                    </div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Amount</th>
+                                                <th>Status</th>
+                                                <th>Requested On</th>
+                                                <th>Updated On</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let data of withdrawdataLists;let i= index;">
+                                                <td>{{i+1}}</td>
+                                                <td><span>&#8364;</span>{{data.amount}}</td>
+                                                <td>
+                                                    <span *ngIf="data.status == 1"> Accepted </span>
+                                                    <span *ngIf="data.status == 3"> In Progress </span>
+                                                    <span *ngIf="data.status == 2"> Rejected </span>
+                                                </td>
+                                                <td>{{data.createdAt|date:'dd/M/yyyy'}}</td>
+                                                <td>{{data.updatedAt|date:'dd/M/yyyy'}}</td>
+                                            </tr>
+                                            <tr *ngIf="withdrawdataLists.length==0">
+                                                <td colspan="5" class="text-center">Geen gegevens gevonden</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="tab-pane fade" id="v-pills-wallet" role="tabpanel" aria-labelledby="v-pills-wallet-tab">
+
+                        <div class="section mb-5 jezsel-profile-section shadow">
+                            <h3>Wallet</h3>
+                            <div class="jezel-profile-balance-interest-g">
+                                <ul>
+                                    <li>
+                                        <div>Saldo</div>
+                                        <div class="jezel-bi-amount">€ {{currentWallet}}</div>
+                                    </li>
+                                    <li>
+                                        <div>Rente</div>
+                                        <div class="jezel-bi-amount">€ {{currentInterest}}</div>
+                                    </li>
+                                    <li>
+                                        <div><strong>Totaal</strong></div>
+                                        <div class="jezel-bi-amount"><strong>€ <span
+                                                    [innerHtml]="getTotal()"></span></strong></div>
+                                    </li>
+                                </ul>
+
+                            </div>
+                            <!-- wallet balance end here -->
+                        </div>
+                        <!-- end here -->
+
+
+
+
+
+                        <div class="section mb-5 jezsel-profile-section shadow">
+
+                            <!-- <h3 class="pb-5">Balance - {{currentWallet}} (Interest - {{currentInterest}})</h3> -->
+                            <div class="nav nav-pills mt-2 jezsel-profile-wallet-swith" id="v-pills-tab" role="tablist"
+                                aria-orientation="horizontal">
+                                <a class="nav-link active pl-4" id="v-pills-deposit-tab" data-toggle="pill"
+                                    href="#v-pills-deposit" role="tab" aria-controls="v-pills-deposit"
+                                    aria-selected="false" (click)="showWithdraw=false;showDeposit=true;">Opwaarderen</a>
+                                <a class="nav-link pl-4" id="v-pills-withdraw-tab" data-toggle="pill"
+                                    href="#v-pills-withdraw" role="tab" aria-controls="v-pills-withdraw"
+                                    aria-selected="true" (click)="showWithdraw=true;showDeposit=false;"
+                                    *ngIf="(!team_id||(team_id&&teamowner))">Uitbetalen</a>
+                                <!-- <a class="nav-link pl-4" id="v-pills-withdraw-tab" data-toggle="pill"
+                                    href="#v-pills-withdraw" role="tab" aria-controls="v-pills-withdraw"
+                                    aria-selected="true" (click)="showWithdraw=true;showDeposit=false;"
+                                    *ngIf="(!team_id||(team_id&&teamowner))&&!disableWithdraw()">Uitbetalen</a> -->
+                            </div>
+                            <div class="tab-pane fade show active" id="v-pills-deposit" role="tabpanel"
+                                aria-labelledby="v-pills-deposit-tab" *ngIf="showDeposit">
+                                <div class="section mb-5">
+
+                                    <!-- <div class="row">
+                                                <div class="col-md-6">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <button class="pull-right btn btn-primary"
+                                                        (click)="choice = 'Deposit'">Make
+                                                        Deposit</button>
+                                                </div>
+                                            </div> -->
+                                    <div class="row mt-3">
+                                        <div class="col-lg-12 col-12 align-self-center">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <input class="form-control" type="text" placeholder="Voer bedrag in"
+                                                            [(ngModel)]="amount" name="amount" appAcceptNumberOnly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <button class="btn btn-primary" *ngIf="amount>0" (click)="submitChoice()">Storting doen</button>
+                                                </div>
+                                            </div>
+
+                                            <!-- <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Deposit</th>
+                                                                <th>Payment Status</th>
+                                                                <th>Deposited On</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let data of depositdataLists;let i= index;">
+                                                                <td>{{i+1}}</td>
+                                                                <td><span>&#8364;</span>{{data.total}}</td>
+                                                                <td>
+                                                                    <span *ngIf="data.status == 1"> Success</span>
+                                                                    <span *ngIf="data.status == 2"> Failure</span>
+                                                                    <span *ngIf="data.status == 3"> In Progress</span>
+                                                                </td>
+                                                                <td>{{data.createdAt|date:'dd/M/yyyy'}}</td>
+                                                            </tr>
+                                                            <tr *ngIf="depositdataLists.length==0">
+                                                                <td colspan="4" class="text-center">Geen gegevens gevonden
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table> -->
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-withdraw" role="tabpanel"
+                                aria-labelledby="v-pills-withdraw-tab" *ngIf="showWithdraw">
+                                <div class="section mb-5">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <button class="btn btn-primary" (click)="openWithdrawModal()"
+                                                    [disabled]="disableWithdraw()"
+                                                    *ngIf="!team_id||(team_id&&teamowner)">Een verzoek tot uitbetaling</button>
+
+                                            </div>
+                                        </div>
+                                        <!-- <div class="row mt-3">
+                                                <div class="col-lg-12 col-12 align-self-center">
+                                                </div>
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Amount</th>
+                                                            <th>Status</th>
+                                                            <th>Requested On</th>
+                                                            <th>Updated On</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let data of withdrawdataLists;let i= index;">
+                                                            <td>{{i+1}}</td>
+                                                            <td><span>&#8364;</span>{{data.amount}}</td>
+                                                            <td>
+                                                                <span *ngIf="data.status == 1"> Accepted </span>
+                                                                <span *ngIf="data.status == 3"> In Progress </span>
+                                                                <span *ngIf="data.status == 2"> Rejected </span>
+                                                            </td>
+                                                            <td>{{data.createdAt|date:'dd/M/yyyy'}}</td>
+                                                            <td>{{data.updatedAt|date:'dd/M/yyyy'}}</td>
+                                                        </tr>
+                                                        <tr *ngIf="withdrawdataLists.length==0">
+                                                            <td colspan="5" class="text-center">Geen gegevens gevonden</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- profile section end here -->
+
+                        <div class="section mb-5 jezsel-profile-section shadow">
+                            <h3 class="mb-3">Transacties</h3>
+                            <div class="nav nav-pills mt-2 jezsel-profile-wallet-swith" id="v-pills-tab" role="tablist"
+                                aria-orientation="horizontal">
+                                <a class="nav-link active pl-4" id="v-pills-deposit-tab1" data-toggle="pill"
+                                    href="#v-pills-deposit1" role="tab" aria-controls="v-pills-deposit1"
+                                    aria-selected="false" (click)="showWithdraw1=false;showDeposit1=true;">Opwaarderen</a>
+                                <a class="nav-link pl-4" id="v-pills-withdraw-tab1" data-toggle="pill"
+                                    href="#v-pills-withdraw1" role="tab" aria-controls="v-pills-withdraw1"
+                                    aria-selected="true" (click)="showWithdraw1=true;showDeposit1=false;">Uitbetalen</a>
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-withdraw1" role="tabpanel"
+                                aria-labelledby="v-pills-withdraw-tab1" *ngIf="showWithdraw1">
+                                <div class="section mb-5">
+                                    <div class="container">
+                                        <div class="row mt-3">
+                                            <div class="col-lg-12 col-12 align-self-center table-responsive">
+                                            </div>
+                                            <table class="table table-bordered ">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Bedrag</th>
+                                                        <th>Status</th>
+                                                        <th>Verzocht op</th>
+                                                        <th>Bijgewerkt op</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let data of withdrawdataLists;let i= index;">
+                                                        <td>{{i+1}}</td>
+                                                        <td><span>&#8364;</span>{{data.amount}}</td>
+                                                        <td>
+                                                            <span *ngIf="data.status == 1"> Succes </span>
+                                                            <span *ngIf="data.status == 3"> In behandeling  </span>
+                                                            <span *ngIf="data.status == 2"> Mislukt </span>
+                                                        </td>
+                                                        <td>{{data.createdAt|date:'dd/M/yyyy'}}</td>
+                                                        <td>{{data.updatedAt|date:'dd/M/yyyy'}}</td>
+                                                    </tr>
+                                                    <tr *ngIf="withdrawdataLists.length==0">
+                                                        <td colspan="5" class="text-center">Geen gegevens gevonden</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="tab-pane fade show active" id="v-pills-deposit1" role="tabpanel"
+                                aria-labelledby="v-pills-deposit-ta1b" *ngIf="showDeposit1">
+                                <div class="section mb-5">
+                                    <div class="row mt-3">
+                                        <div class="col-lg-12 col-12 align-self-center">
+                                            <div class="row" *ngIf="choice">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <input class="form-control" type="" placeholder="Voer Bedrag"
+                                                            [(ngModel)]="amount" name="amount">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <button class="btn btn-primary"
+                                                        (click)="submitChoice()">{{choice}}</button>
+                                                </div>
+                                            </div>
+                                            <div class="table-responsive">
+                                            <table class="table table-bordered ">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Opwaarderen</th>
+                                                        <th>Status van Betaling</th>
+                                                        <th>Gestort op</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let data of depositdataLists;let i= index;">
+                                                        <td>{{i+1}}</td>
+                                                        <td><span>&#8364;</span>{{data.total}}</td>
+                                                        <td>
+                                                            <span *ngIf="data.status == 1"> Succes</span>
+                                                            <span *ngIf="data.status == 2"> Mislukt</span>
+                                                            <span *ngIf="data.status == 3"> In behandeling  <button class="btn btn-primary ml-2" (click)="sendPayment(data)">Betalen</button></span>
+                                                        </td>
+                                                        <td>{{data.createdAt|date:'dd/M/yyyy'}}</td>
+                                                    </tr>
+                                                    <tr *ngIf="depositdataLists.length==0">
+                                                        <td colspan="4" class="text-center">Geen gegevens gevonden
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- end here -->
+
+
+
+                    </div>
+                    <!-- wallet end here -->
+
+
+
+
+                    <div class="tab-pane fade" id="v-pills-employees" role="tabpanel"
+                        aria-labelledby="v-pills-employees-tab">
+                        <div class="section mb-5 jezsel-profile-section shadow" *ngIf="showList">
+
+
+                            <div class="row">
+
+
+                                <div class="col-md-6">
+                                    <h3>Werknemers</h3>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="pull-right btn btn-primary"
+                                        (click)="showList = false">Aanmaken</button>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-lg-12 col-12 align-self-center">
+                                    <div class="row" *ngIf="choice">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input class="form-control" type="" placeholder="Voer Bedrag"
+                                                    [(ngModel)]="amount" name="amount">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button class="btn btn-primary btn-lg btn-grad"
+                                                (click)="submitChoice()">{{choice}}</button>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                    <table class="table table-bordered ">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Voornaam</th>
+                                                <th>Achternaam</th>
+                                                <th>Tussenvoegsel</th>
+                                                <th>E-mail</th>
+                                                <th>Telefoonnummer</th>
+                                                <th>Verwijderen</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let data of employeeLists;let i= index;">
+                                                <td>{{i+1}}</td>
+                                                <td>{{data.firstname}}</td>
+                                                <td>{{data.lastname}}</td>
+                                                <td>{{data.insertion}}</td>
+                                                <td>{{data.email}}</td>
+                                                <td>{{data.phone}}</td>
+                                                <td><button class="btn btn-primary" (click)="updateStatus(data)"><i
+                                                            class="fa fa-trash"></i></button></td>
+                                            </tr>
+                                            <tr *ngIf="employeeLists.length==0">
+                                                <td colspan="7" class="text-center">Geen gegevens gevonden</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="section login-area" *ngIf="!showList">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="login-box">
+                                            <h3 class="text-center text-primary mb-4">Maak gastaccount</h3>
+                                            <form class="login-form" [formGroup]="myFormGroup">
+                                                <div class="row">
+                                                    <div class="col-md-4 email">
+                                                        <label>Voornaam</label>
+                                                        <input type="text" name="firstname" formControlName="firstname"
+                                                            placeholder="Voer uw voornaam in">
+                                                    </div>
+                                                    <div class="col-md-4 password">
+                                                        <label>Tussenvoegsel</label>
+                                                        <input type="text" name="insertion" formControlName="insertion"
+                                                            placeholder="Voer uw tussenvoegsel in">
+                                                    </div>
+                                                    <div class="col-md-4 password">
+                                                        <label>Achternaam</label>
+                                                        <input type="text" name="lastname" formControlName="lastname"
+                                                            placeholder="Voer uw achternaam in">
+                                                    </div>
+                                                    <div class="col-md-4 password">
+                                                        <label>E-mail</label>
+                                                        <input type="text" name="email" formControlName="email"
+                                                            placeholder="Voer uw e-mailadres in">
+                                                    </div>
+                                                    <div class="col-md-4 password">
+                                                        <label>Telefoonnummer</label>
+                                                        <input type="text" name="phone" formControlName="phone"
+                                                            placeholder="Voer uw telefoonnummer in">
+                                                    </div>
+                                                    <!-- <div class="col-md-4 password">
+                                                        <label>Password</label>
+                                                        <input type="password" name="password"
+                                                            formControlName="password" placeholder="Voer Password">
+                                                    </div> -->
+                                                    <div class="col-md-6">
+                                                        <button type="submit" name="button"
+                                                            (click)="register()">Aanmaken</button>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <button type="submit" name="button"
+                                                            (click)="showList=true">Annuleren</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- employees end here -->
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<ng-template #template>
+    <div id="myModalId">
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Zie boekingsdetails</h4>
+            <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+                <span aria-hidden="true" class="visually-hidden">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body jezsel-profile-myord-pp">
+            <div class="container profile-popup-content table-responsive">
+                <table class="table table-bordered ">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Dienst</th>
+                            <th>Type</th>
+                            <th>Prijs</th>
+                            <th>Aanvang</th>
+                            <th>Einde</th>
+                            <th>Extra’s</th>
+                            <th>Annuleren</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let order of selectedProduct;let i = index;">
+                            <td>{{i+1}}</td>
+                            <td>{{order.name}}</td>
+                            <td [innerHtml]="getType(order.type)">{{order.type}}</td>
+                            <td><span>&#8364;</span>{{order.price}}</td>
+                            <td>{{order.checkindate|date:'dd/M/yyyy'}} {{order.checkintime}}</td>
+                            <td>{{order.checkoutdate|date:'dd/M/yyyy'}} {{order.checkouttime}}</td>
+                            <td>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Naam</th>
+                                            <th>Prijs</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let extras of order.extras">
+                                            <td>{{extras.extraName}}</td>
+                                            <td><span>&#8364;</span>{{extras.price}}</td>
+                                        </tr>
+                                        <tr *ngIf="order&&order.extras&&order.extras.length==0">
+                                            <td colspan="2">No Extras Found</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td><button class="btn btn-primary" (click)="cancelOrder(order)"
+                                    *ngIf="order.maxcanceldate&&order.status!=0&&isNotExpired(order.maxcanceldate)">Annuleren</button><span
+                                    class="text-danger" *ngIf="order.status==0">Geannuleerd</span></td>
+                        </tr>
+                        <tr *ngIf="selectedProduct.length==0">
+                            <td colspan="7" class="text-center">Geen gegevens gevonden</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="modalRef?.hide()">Sluiten</button>
+        </div>
+    </div>
+
+</ng-template>
+
+<!-- =======================
+	Form -->
+<ng-template #withdrawtemplate>
+    <div id="myModalId">
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Verzoek tot uitbetaling</h4>
+            <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+                <span aria-hidden="true" class="visually-hidden">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body mb-2">
+            <!-- <p>You have <span>&#8364;</span><span [innerHtml]="getTotal()"></span> balance in your account.Are you proceed for Withdraw
+                request ?</p> -->
+                <p>U heeft (<span>&#8364;</span><span [innerHtml]="getTotal()"></span>) in uw wallet. Wilt u verder gaan met uw verzoek uitbetaling?</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" (click)="makeWithdraw()" *ngIf="currentWallet">Ja</button>
+            <button class="btn btn-default" (click)="modalRef?.hide()">Nee</button>
+        </div>
+    </div>
+
+</ng-template>
