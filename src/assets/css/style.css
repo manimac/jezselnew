@@ -12950,15 +12950,17 @@
         #jezl-hm-search .form-control::placeholder{ font-size: 12px;    color:#000; 
         font-weight: bold;}
 
-        #jezl-hm-search select {
-        padding: 14px 5px 12px 12px; 
-        color: #7a8797;
-        font-size: 12px;
-        padding-left: 28px;
-        color:#000;
-        font-weight: bold;
-        padding-top: 10px;
-           }
+#jezl-hm-search select {
+	padding: 14px 5px 12px 12px;
+	/* color: #7a8797; */
+	font-size: 12px;
+	padding-left: 28px;
+	color: #000;
+	font-weight: bold;
+	padding-top: 10px;
+	text-indent: 15px;
+	padding-left: 0px;
+}
         #jezl-hm-search span{ margin-top: -2px;}
         #jezl-hm-search span img{
         width: 13px;
