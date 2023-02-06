@@ -12958,8 +12958,7 @@
 	color: #000;
 	font-weight: bold;
 	padding-top: 10px;
-	text-indent: 15px;
-	padding-left: 0px;
+
 }
         #jezl-hm-search span{ margin-top: -2px;}
         #jezl-hm-search span img{
@@ -13963,10 +13962,10 @@
             }
             
             #jezl-hm-search select {
-            padding: 14px 5px 12px 12px; 
+            padding: 14px 5px 12px 32px; 
             color: #7a8797;
             font-size: 12px;
-           text-indent:15px;
+            text-indent:15px;
             color:#000;
             font-weight: bold;
             padding-top: 10px;
